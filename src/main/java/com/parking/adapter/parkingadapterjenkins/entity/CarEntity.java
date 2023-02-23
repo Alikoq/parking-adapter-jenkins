@@ -15,7 +15,7 @@ import lombok.Setter;
 import org.hibernate.annotations.Generated;
 
 @Entity
-@Table(name = "parking-car")
+@Table
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
