@@ -1,3 +1,4 @@
+/*
 package com.parking.adapter.parkingadapterjenkins.entity;
 
 import com.parking.adapter.parkingadapterjenkins.model.Car;
@@ -38,3 +39,4 @@ public class CarEntity {
     }
 
 }
+*/
