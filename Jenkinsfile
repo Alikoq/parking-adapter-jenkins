@@ -21,11 +21,7 @@ pipeline {
                 }
             }
         }
-        stage('Docker Build') {
-            steps {
-                sh 'docker ps'
-            }
-        }
+
         stage('Deliver') {
               agent any
             steps {
