@@ -21,6 +21,12 @@ pipeline {
                 }
             }
         }
+        stage('Docker Build') {
+              agent any
+            steps{
+                sh 'docker build -t aliguliyev75/parking-adapter-jenkins-0.0.1-SNAPSHOT:latest .'
+            }
+        }
 
         stage('Deliver') {
               agent any
