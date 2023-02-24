@@ -23,7 +23,7 @@ pipeline {
         }
         stage('Docker Build') {
             steps {
-                sh 'docker build -t aliguliyev75/parking-adapter-jenkins:latest .'
+                sh 'docker ps'
             }
         }
         stage('Deliver') {
