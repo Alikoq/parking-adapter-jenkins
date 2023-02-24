@@ -1,11 +1,14 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.9.0-eclipse-temurin-11'
-            args '-v /root/.m2:/root/.m2'
-        }
-    }
+    agent any
     stages {
+        stage('Mvn install') {
+            agent {
+            docker {
+                image 'maven:3.9.0-eclipse-temurin-11'
+                args '-v /root/.m2:/root/.m2'
+              }
+            }
+        }
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
@@ -22,14 +25,12 @@ pipeline {
             }
         }
         stage('Docker Build') {
-              agent any
             steps{
                 sh 'docker build -t aliguliyev75/parking-adapter-jenkins-0.0.1-SNAPSHOT:latest .'
             }
         }
 
         stage('Deliver') {
-              agent any
             steps {
                 sh 'mvn --version'
             }
