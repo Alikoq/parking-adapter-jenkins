@@ -1,15 +1,31 @@
 pipeline {
-	agent any
-  stages {
-  	stage('Maven Install') {
-    	agent {
-      	docker {
-        	image 'maven:3.5.0'
+    agent {
+        docker {
+            image 'maven:3.9.0-eclipse-temurin-11'
+            args '-v /root/.m2:/root/.m2'
         }
-      }
-      steps {
-      	sh 'mvn clean install'
-      }
     }
-  }
+    stages {
+        stage('Build') {
+            steps {
+                sh 'mvn -B -DskipTests clean package'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+            post {
+                always{
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }
+        stage('Deliver') {
+              agent any
+            steps {
+                sh 'mvn --version'
+            }
+        }
+    }
 }
