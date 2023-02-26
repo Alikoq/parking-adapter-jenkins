@@ -21,6 +21,11 @@ pipeline {
                 }
             }
         }
+        stage('Build Docker image') {
+            steps {
+                sh 'docker build -t aliguliyev75/parking-adapter-jenkins .'
+            }
+        }
         stage('Deliver') {
             steps {
                 sh 'mvn --version'
