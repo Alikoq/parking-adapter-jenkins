@@ -22,7 +22,6 @@ pipeline {
             }
         }
         stage('Deliver') {
-              agent any
             steps {
                 sh 'mvn --version'
             }
