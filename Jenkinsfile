@@ -5,11 +5,18 @@ pipeline {
     }
     stages {
         stage('Build Maven'){
-            steps{
+            steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Alikoq/parking-adapter-jenkins']]])
                 sh 'mvn clean install'
             }
         }
 
+        stage('Build Docker image') {
+            steps {
+                script {
+                    sh 'docker build -t aliguliyev75/parking-adapter-jenkins .'
+                }
+            }
+        }
     }
 }
