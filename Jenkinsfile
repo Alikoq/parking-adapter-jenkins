@@ -1,35 +1,15 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.9.0-eclipse-temurin-11'
-            args '-v /root/.m2:/root/.m2'
-        }
+    agent any
+    tools {
+        maven 'maven_3_5_0'
     }
     stages {
-        stage('Build') {
-            steps {
-                sh 'mvn -B -DskipTests clean package'
+        stage('Build Maven'){
+            steps{
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Alikoq/parking-adapter-jenkins']]])
+                sh 'mvn clean install'
             }
         }
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
-            post {
-                always{
-                    junit 'target/surefire-reports/*.xml'
-                }
-            }
-        }
-        stage('Build Docker image') {
-            steps {
-                sh 'docker build -t aliguliyev75/parking-adapter-jenkins .'
-            }
-        }
-        stage('Deliver') {
-            steps {
-                sh 'mvn --version'
-            }
-        }
+
     }
 }
