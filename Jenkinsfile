@@ -10,12 +10,16 @@ pipeline {
                 sh 'mvn clean install'
             }
         }
-
         stage('Build Docker image') {
             steps {
                 script {
                     sh 'docker build -t aliguliyev75/parking-adapter-jenkins .'
                 }
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
             }
         }
     }
