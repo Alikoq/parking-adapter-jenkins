@@ -22,5 +22,15 @@ pipeline {
                 sh 'mvn test'
             }
         }
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage('Deliver') {
+            steps {
+                sh 'mvn --version'
+            }
+        }
     }
 }
