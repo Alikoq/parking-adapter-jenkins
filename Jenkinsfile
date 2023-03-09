@@ -20,10 +20,15 @@ pipeline {
                 }
             }
         }
-        stage('Docker image push') {
+        stage('Dockerhub login') {
             steps {
                     sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
             }
+        }
+        stage('Push to dockerhub'){
+            steps {
+                    sh 'docker push aliguliyev75/parking-adapter-jenkins'
+             }
         }
         stage('Test') {
             steps {
