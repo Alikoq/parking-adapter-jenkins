@@ -17,9 +17,12 @@ pipeline {
                 }
             }
         }
-        stage('Login') {
+        stage('Docker image push') {
             steps {
-                sh ''
+                 withCredentials ([usernamePassword(credentialsId: 'dockerHub', passwordVariable 'dockerHubPassword', usernameVariable 'dockerHubUser')]) {
+                      sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                      sh 'docker push aliguliyev75/parking-adapter-jenkins'
+                 }
             }
         }
         stage('Test') {
