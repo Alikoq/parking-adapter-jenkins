@@ -3,6 +3,9 @@ pipeline {
     tools {
         maven 'mvn_3_9_0'
     }
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+    }
     stages {
         stage('Build Maven'){
             steps {
@@ -18,12 +21,8 @@ pipeline {
             }
         }
         stage('Docker image push') {
-            agent any
             steps {
-                 withCredentials ([usernamePassword(credentialsId: 'dockerhub', passwordVariable 'DOCKER_REG_PWD', usernameVariable 'DOCKER_REG_USR')]) {
-                      sh "docker login -u ${$DOCKER_REG_USR} -p ${$DOCKER_REG_PWD}"
-                      sh 'docker push aliguliyev75/parking-adapter-jenkins'
-                 }
+                    sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
             }
         }
         stage('Test') {
