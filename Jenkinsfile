@@ -17,6 +17,11 @@ pipeline {
                 }
             }
         }
+        stage('Login') {
+            steps {
+                sh ''
+            }
+        }
         stage('Test') {
             steps {
                 sh 'mvn test'
