@@ -18,9 +18,10 @@ pipeline {
             }
         }
         stage('Docker image push') {
+            agent any
             steps {
-                 withCredentials ([usernamePassword(credentialsId: 'dockerhub', passwordVariable 'dockerHubPassword', usernameVariable 'dockerHubUser')]) {
-                      sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                 withCredentials ([usernamePassword(credentialsId: 'dockerhub', passwordVariable 'dockerhubPassword', usernameVariable 'dockerhubUser')]) {
+                      sh "docker login -u ${env.dockerhubUser} -p ${env.dockerhubPassword}"
                       sh 'docker push aliguliyev75/parking-adapter-jenkins'
                  }
             }
