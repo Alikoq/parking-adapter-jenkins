@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: second-kube-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: second-kube-app #should be matched with label name
+      tier: backend
+  template: # no need add kind:Pod it belong by default to POD object
+    metadata:
+      labels:
+        app: second-kube-app
+        tier: backend
+    spec: # Pod config below
+      containers:
+        - name: second-node
+          image: aliguliyev75/parking-adapter-jenkins-v3:5
+
+

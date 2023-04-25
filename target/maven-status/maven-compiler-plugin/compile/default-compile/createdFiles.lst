@@ -1,0 +1,7 @@
+com/parking/adapter/parkingadapterjenkins/controller/ParkingController.class
+com/parking/adapter/parkingadapterjenkins/service/impl/CarService.class
+com/parking/adapter/parkingadapterjenkins/model/Car$CarBuilder.class
+com/parking/adapter/parkingadapterjenkins/service/Operations.class
+com/parking/adapter/parkingadapterjenkins/ParkingAdapterJenkinsApplication.class
+com/parking/adapter/parkingadapterjenkins/repository/DatabaseOperations.class
+com/parking/adapter/parkingadapterjenkins/model/Car.class
