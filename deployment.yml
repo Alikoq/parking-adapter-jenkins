@@ -2,9 +2,13 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: second-kube-app-deployment
+  labels:
+    group: example-deployments
 spec:
   replicas: 1
   selector:
+#    matchExpressions:
+#      - {key: app, operator: In, values: [second-kube-app]}
     matchLabels:
       app: second-kube-app #should be matched with label name
       tier: backend
@@ -16,6 +20,15 @@ spec:
     spec: # Pod config below
       containers:
         - name: second-node
-          image: aliguliyev75/parking-adapter-jenkins-v3:5
+          image: aliguliyev75/parking-adapter-jenkins-v3:latest
+          imagePullPolicy: Always #Always will be force pulling latest image if we don't specify :latest tag
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            periodSeconds: 10
+            initialDelaySeconds: 1
+
+
 
 

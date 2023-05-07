@@ -31,7 +31,8 @@ public class ParkingController {
         Car car = Car.builder().model("BMW").color("black").year(2022).build();
         Car car2 = Car.builder().model("Mercedes").color("white").year(2022).build();
         Car car3 = Car.builder().model("Haval").color("white").year(2022).build();
-        var cars = List.of(car, car2, car3);
+        Car car4 = Car.builder().model("Lamborghini").color("black").year(2025).build();
+        var cars = List.of(car, car2, car3, car4);
         Long id = operations.addCar(car);
         return new ResponseEntity<>(cars, HttpStatus.OK);
     }
