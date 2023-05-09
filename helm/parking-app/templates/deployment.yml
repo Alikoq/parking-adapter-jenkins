@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: second-kube-app-deployment
+  name: {{ .Values.metadata.name }}
   labels:
-    group: example-deployments
+    group: {{ .Values.metadata.labels.group }}
 spec:
   replicas: 1
   selector:
 #    matchExpressions:
 #      - {key: app, operator: In, values: [second-kube-app]}
     matchLabels:
-      app: second-kube-app #should be matched with label name
-      tier: backend
+      app: {{ .Values.matchLabels.app }} #should be matched with label name
+      tier: {{ .Values.matchLabels.tier }}
   template: # no need add kind:Pod it belong by default to POD object
     metadata:
       labels:
-        app: second-kube-app
-        tier: backend
+        app: {{ .Values.matchLabels.app }}
+        tier: {{ .Values.matchLabels.tier }}
     spec: # Pod config below
       containers:
         - name: second-node
-          image: aliguliyev75/parking-adapter-jenkins-v3:latest
+          image: {{ .Values.deployment.image }}:{{ .Values.deployment.tag }}
           imagePullPolicy: Always #Always will be force pulling latest image if we don't specify :latest tag
 #          livenessProbe:
 #            httpGet:

@@ -1,0 +1,10 @@
+deployment:
+  image: aliguliyev75/parking-adapter-jenkins-v3
+  tag: 5
+metadata:
+  name: second-kube-app-deployment
+  labels:
+    group: example-deployments
+matchLabels:
+  app: second-kube-app
+  tier: backend
