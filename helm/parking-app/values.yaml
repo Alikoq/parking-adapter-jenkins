@@ -3,8 +3,13 @@ deployment:
   tag: 5
 metadata:
   name: second-kube-app-deployment
+  namespace: prod
   labels:
     group: example-deployments
 matchLabels:
   app: second-kube-app
   tier: backend
+service:
+  name: backend-prod
+appMode: prod
+

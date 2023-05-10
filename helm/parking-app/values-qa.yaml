@@ -2,9 +2,14 @@ deployment:
   image: aliguliyev75/parking-adapter-jenkins-v3
   tag: 5
 metadata:
-  name: parking-app2-qa
+  name: second-kube-app-deployment-qa
+  namespace: qa
   labels:
     group: example-deployments-qa
 matchLabels:
-  app: kube-app-parking-qa
+  app: second-kube-app-qa
   tier: backend
+service:
+  name: backend-qa
+appMode: qa
+
